@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/nimgo/nimble"
+	"github.com/nimgo/nim/server/core"
 )
 
 // ALogger interface
@@ -36,7 +36,7 @@ func (l *Logger) ServeHTTP(w http.ResponseWriter, r *http.Request, next http.Han
 
 	next(w, r)
 
-	ww := w.(nimble.Writer)
+	ww := w.(core.Writer)
 
 	clientIP := "0.0.0.0"
 	latency := time.Since(start)

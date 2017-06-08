@@ -1,11 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/nimgo/gomux"
-	"github.com/nimgo/nim"
+	"github.com/nimgo/nim/server"
 )
 
 func main() {
@@ -25,14 +24,14 @@ func main() {
 		WithHandlerFunc(middlewareC).
 		SubMux()
 	{
-		pttMux.GET("/protected/user/:id", appHandler("viewing: /protected/user/:id"))
+		pttMux.GET("/protected/users/:id", appHandler("viewing: /protected/users/:id"))
 		pttMux.GET("/protected/users", appHandler("viewing: /protected/users"))
 	}
 
 	// Another way to handle this mux.
 	auth := nim.NewMux()
 	{
-		auth.GET("/auth/boy/:pants", appHandler("boy"))
+		auth.GET("/auth/boy/:id", appHandler("boy"))
 		auth.GET("/auth/girl", appHandler("girl"))
 	}
 	stack := nim.New()
@@ -41,6 +40,10 @@ func main() {
 	stack.With(auth)
 
 	mux.GET("/auth/*stack", stack.ServeHTTP)
+
+	// mux.NotFound = http.FileServer(http.Dir("assets/index.html"))
+	// mux.ServeFiles("/p/_filepath", http.Dir("public/"))
+	mux.NotFound = &notfound{}
 
 	n := nim.New()
 	n.With(mux)
@@ -59,13 +62,13 @@ func appHandler(msg string) http.HandlerFunc {
 }
 
 func middlewareA(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("[n.] I am middlewareA")
+	w.Write([]byte("[n.] I am middlewareA \n"))
 	//bun := hax.GetBundle(c)
 	//bun.Set("valueA", ": from middlewareA")
 }
 
 func middlewareB(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("[n.] I am middlewareB")
+	w.Write([]byte("[n.] I am middlewareB \n"))
 	//bun := hax.GetBundle(c)
 	//bun.Set("valueB", ": from middlewareB")
 }
@@ -73,4 +76,12 @@ func middlewareB(w http.ResponseWriter, r *http.Request) {
 func middlewareC(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 	w.Write([]byte("[n.] I am middlewareC \n"))
 	next(w, r)
+}
+
+type notfound struct{}
+
+func (nf *notfound) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("[n.] I am not found \n"))
+	//bun := hax.GetBundle(c)
+	//bun.Set("valueB", ": from middlewareB")
 }

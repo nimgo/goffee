@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/nimgo/gomux"
-	"github.com/nimgo/nim/core"
+	"github.com/nimgo/nim/server/core"
 )
 
 // NewMux returns a new gomux Router
