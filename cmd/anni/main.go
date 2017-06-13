@@ -4,13 +4,13 @@ import (
 	"net/http"
 
 	"github.com/nimgo/gomux"
-	"github.com/nimgo/nim/server/nim"
+	"github.com/nimgo/nim/server/anni"
 )
 
 func main() {
 
 	// Create a new router. The API is the same as httprouter.New()
-	mux := nim.NewMux()
+	mux := anni.NewMux()
 	mux.GET("/public/post/:id", appHandler("viewing: /public/post/:id"))
 	mux.GET("/inlinefunc", func(w http.ResponseWriter, req *http.Request) {
 		w.Write([]byte("Hello from an inline func!"))
@@ -18,7 +18,7 @@ func main() {
 
 	// Create a subrouter using mainRouter.Path(method, path)
 	// Add in the required middleware
-	pttStack := nim.SubPath(mux, "GET", "/protected/*path")
+	pttStack := anni.SubPath(mux, "GET", "/protected/*path")
 	pttStack.UseFunc(middlewareA)
 	pttStack.UseFunc(middlewareB)
 	pttStack.UseHandlerFunc(middlewareC)
@@ -29,13 +29,13 @@ func main() {
 	}
 
 	// Another way to handle this mux.
-	auth := nim.NewMux()
+	auth := anni.NewMux()
 	{
 		auth.GET("/auth/boy/:id", appHandler("boy"))
 		auth.GET("/auth/girl", appHandler("girl"))
 	}
 
-	stack := nim.New()
+	stack := anni.New()
 	stack.UseFunc(middlewareA)
 	stack.UseFunc(middlewareB)
 	stack.Use(auth)
@@ -46,9 +46,9 @@ func main() {
 	// mux.ServeFiles("/p/_filepath", http.Dir("public/"))
 	mux.NotFound = &notfound{}
 
-	n := nim.New()
+	n := anni.New()
 	n.Use(mux)
-	nim.Run(n, ":3000")
+	anni.Run(n, ":3000")
 }
 
 func appHandler(msg string) http.HandlerFunc {

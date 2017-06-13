@@ -1,11 +1,11 @@
-package nim
+package anni
 
 import (
 	"os"
 	"testing"
 )
 
-func TestNimRun(t *testing.T) {
+func TestAnniRun(t *testing.T) {
 	// just test that Run doesn't bomb
 	go Run(New(), ":3000")
 }

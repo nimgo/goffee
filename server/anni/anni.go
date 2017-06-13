@@ -1,4 +1,4 @@
-package nim
+package anni
 
 import (
 	"log"
@@ -27,7 +27,7 @@ func (s *Stack) SubMux() *gomux.Router {
 	return submux
 }
 
-// Run is a convenience function that runs the nim stack as an HTTP
+// Run is a convenience function that runs the anni stack as an HTTP
 // server. The addr string takes the same format as http.ListenAndServe.
 func Run(ns *Stack, addr ...string) {
 	l := log.New(os.Stdout, "[n.] ", 0)

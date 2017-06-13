@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"net/http"
 
-	"github.com/nimgo/nim/server/nim"
+	"github.com/nimgo/nim/server/anni"
 
 	"net/http/httptest"
 	"testing"
@@ -14,7 +14,7 @@ func TestStatic(t *testing.T) {
 	rec := httptest.NewRecorder()
 	rec.Body = new(bytes.Buffer)
 
-	n := nim.New()
+	n := anni.New()
 	n.UseHandler(NewStatic(http.Dir(".")))
 
 	req, err := http.NewRequest("GET", "http://localhost:3000/static_test.go", nil)
@@ -33,7 +33,7 @@ func TestStaticHead(t *testing.T) {
 	rec := httptest.NewRecorder()
 	rec.Body = new(bytes.Buffer)
 
-	n := nim.New()
+	n := anni.New()
 	n.UseHandler(NewStatic(http.Dir(".")))
 	n.Use(http.NotFoundHandler())
 
@@ -52,7 +52,7 @@ func TestStaticHead(t *testing.T) {
 func TestStaticAsPost(t *testing.T) {
 	rec := httptest.NewRecorder()
 
-	n := nim.New()
+	n := anni.New()
 	n.UseHandler(NewStatic(http.Dir(".")))
 	n.Use(http.NotFoundHandler())
 
@@ -68,7 +68,7 @@ func TestStaticAsPost(t *testing.T) {
 func TestStaticBadDir(t *testing.T) {
 	rec := httptest.NewRecorder()
 
-	n := nim.New()
+	n := anni.New()
 	n.UseHandler(NewRecovery())
 	n.UseHandler(NewColorLogger())
 	n.UseHandler(NewStatic(http.Dir("static")))
@@ -87,9 +87,9 @@ func TestStaticBadDir(t *testing.T) {
 func TestStaticOptionsServeIndex(t *testing.T) {
 	rec := httptest.NewRecorder()
 
-	n := nim.New()
+	n := anni.New()
 	s := NewStatic(http.Dir("."))
-	s.indexFile = "nimble.go"
+	s.indexFile = "anni.go"
 	n.UseHandler(s)
 
 	req, err := http.NewRequest("GET", "http://localhost:3000/", nil)
@@ -104,7 +104,7 @@ func TestStaticOptionsServeIndex(t *testing.T) {
 func TestStaticOptionsPrefix(t *testing.T) {
 	rec := httptest.NewRecorder()
 
-	n := nim.New()
+	n := anni.New()
 	s := NewStatic(http.Dir("."))
 	s.prefix = "/public"
 	n.UseHandler(s)
