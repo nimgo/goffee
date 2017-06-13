@@ -7,7 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/nimgo/nim/server/anni"
+	"github.com/nimgo/goffee/server/anni"
 )
 
 func TestLogger(t *testing.T) {

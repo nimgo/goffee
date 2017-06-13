@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"fmt"
 	"net/http"
 	"path"
 	"strings"
@@ -34,6 +35,8 @@ func (s *Static) ServeHTTP(rw http.ResponseWriter, r *http.Request, next http.Ha
 		return
 	}
 	file := r.URL.Path
+
+	fmt.Println(file)
 
 	// if we have a prefix, filter requests by stripping the prefix
 	if s.prefix != "" {

@@ -1,0 +1,36 @@
+<div class="container col-lg-8 col-lg-offset-2 col-md-12" *ngIf="trigger">
+    <div class="row pull-right" *ngIf="canAction">
+        <div class="btn btn-success">Approve</div>
+        <div class="btn btn-default">Reject</div>
+    </div>
+    <div class="row">
+        <h4><a routerLink="/view/{{trigger?.id}}" routerLinkActive="active">{{trigger?.title}}</a></h4>
+        {{trigger.started_dt | amDateFormat: 'DD MMM YYYY HH:mm'}} ({{trigger.started_dt | amTimeAgo}})
+        <div class="panel panel-default">
+            <div class="panel-body">
+                {{trigger?.subtitle}}
+            </div>
+        </div>
+
+
+        <p><hx-layout [blobber]="trigger.flow?.layout"></hx-layout></p>
+
+        <!--<div class="col-lg-4 marginTop30">
+            <button routerLink="/edit/{{model?.id}}" routerLinkActive="active" class="btn btn-block btn-success">Edit</button>
+            <ul class="list-group marginTop30">
+                <li class="list-group-item" [ngClass]="{ 'list-group-item-success': model?.status == Status.Open, 'list-group-item-danger': model?.status == Status.Closed }">
+                    <span class="text-muted">Status:</span> {{toText('status', model?.status)}}
+                </li>
+                <li class="list-group-item"><span class="text-muted">Issue#:</span> RE-{{model?.id}}</li>
+                <li class="list-group-item"><span class="text-muted">Type:</span> {{toText('type', model?.type)}}</li>
+                <li class="list-group-item"><span class="text-muted">Priority:</span> {{toText('priority', model?.priority)}}</li>
+                <li class="list-group-item"><span class="text-muted">Impact:</span> {{toText('impact', model?.impact)}}</li>
+                <li class="list-group-item"><span class="text-muted">Resource:</span> {{toText('effort', model?.effort)}}</li>
+            </ul>
+        </div>-->
+
+    </div>
+
+
+</div>
+

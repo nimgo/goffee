@@ -1,0 +1,7 @@
+<div class="well">
+    <template ngFor let-layout let-idx="index" [ngForOf]="layouts">
+        <div *ngIf="layout.layout == 'raw'" [innerHTML]="layout.data | linkify"></div>
+        <!--<div class="well" *ngIf="layout.layout != 'html'">{{layout.data}}</div>-->
+        <div *ngIf="layout.layout != 'raw'" [innerHTML]="layout.data"></div>
+    </template>
+</div>

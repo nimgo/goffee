@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"net/http"
 
-	"github.com/nimgo/nim/server/anni"
+	"github.com/nimgo/goffee/server/anni"
 
 	"net/http/httptest"
 	"testing"

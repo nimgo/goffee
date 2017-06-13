@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/nimgo/nim/server/anni"
+	"github.com/nimgo/goffee/server/anni"
 )
 
 // ALogger interface

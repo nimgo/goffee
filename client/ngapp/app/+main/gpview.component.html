@@ -1,0 +1,29 @@
+<div class="row col-lg-8 col-lg-offset-2 col-md-12" *ngIf="group">
+    <div class="row pull-right" *ngIf="canAction">
+        <div class="btn btn-success">Approve</div>
+        <div class="btn btn-default">Reject</div>
+    </div>
+
+    <h3>{{group.first_flow?.title}}</h3>
+
+    <template ngFor let-trigger let-idx="index" [ngForOf]="group.triggers">
+        <h5 class="text-primary">
+            {{trigger?.flow.subtitle}}
+            <small>@{{trigger?.flow.creator_id}}, {{trigger.started_dt | amDateFormat: 'DD MMM YYYY HH:mm'}} ({{trigger.started_dt | amTimeAgo}})</small>
+        </h5>
+        <div class="media">
+            <!--<h5><a routerLink="/view/{{trigger?.id}}" routerLinkActive="active">{{trigger?.flow.subtitle}}</a></h5>-->
+            <div class="media-body">
+                <p><hx-layout [blobber]="trigger.flow?.layout"></hx-layout></p>
+            </div>
+            <div class="media-right paddingLeft30 paddingTop10">
+                <input type="checkbox" id="{{trigger?.id}}" (change)="onBoxChange(trigger?.id)">
+            </div>
+        </div>
+    </template>
+
+</div>
+
+
+
+

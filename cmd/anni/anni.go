@@ -3,8 +3,8 @@ package main
 import (
 	"net/http"
 
+	"github.com/nimgo/goffee/server/anni"
 	"github.com/nimgo/gomux"
-	"github.com/nimgo/nim/server/anni"
 )
 
 func main() {
