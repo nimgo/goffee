@@ -4,18 +4,18 @@ import (
 	"bytes"
 	"net/http"
 
+	"github.com/nimgo/nim/server/nim"
+
 	"net/http/httptest"
 	"testing"
-
-	"github.com/nimgo/nim/server/core"
 )
 
 func TestStatic(t *testing.T) {
 	rec := httptest.NewRecorder()
 	rec.Body = new(bytes.Buffer)
 
-	n := core.New()
-	n.WithHandler(NewStatic(http.Dir(".")))
+	n := nim.New()
+	n.UseHandler(NewStatic(http.Dir(".")))
 
 	req, err := http.NewRequest("GET", "http://localhost:3000/static_test.go", nil)
 	if err != nil {
@@ -33,9 +33,9 @@ func TestStaticHead(t *testing.T) {
 	rec := httptest.NewRecorder()
 	rec.Body = new(bytes.Buffer)
 
-	n := core.New()
-	n.WithHandler(NewStatic(http.Dir(".")))
-	n.With(http.NotFoundHandler())
+	n := nim.New()
+	n.UseHandler(NewStatic(http.Dir(".")))
+	n.Use(http.NotFoundHandler())
 
 	req, err := http.NewRequest("HEAD", "http://localhost:3000/static_test.go", nil)
 	if err != nil {
@@ -52,9 +52,9 @@ func TestStaticHead(t *testing.T) {
 func TestStaticAsPost(t *testing.T) {
 	rec := httptest.NewRecorder()
 
-	n := core.New()
-	n.WithHandler(NewStatic(http.Dir(".")))
-	n.With(http.NotFoundHandler())
+	n := nim.New()
+	n.UseHandler(NewStatic(http.Dir(".")))
+	n.Use(http.NotFoundHandler())
 
 	req, err := http.NewRequest("POST", "http://localhost:3000/static_test.go", nil)
 	if err != nil {
@@ -68,12 +68,12 @@ func TestStaticAsPost(t *testing.T) {
 func TestStaticBadDir(t *testing.T) {
 	rec := httptest.NewRecorder()
 
-	n := core.New().
-		WithHandler(NewRecovery()).
-		WithHandler(NewColorLogger()).
-		WithHandler(NewStatic(http.Dir("static")))
+	n := nim.New()
+	n.UseHandler(NewRecovery())
+	n.UseHandler(NewColorLogger())
+	n.UseHandler(NewStatic(http.Dir("static")))
 
-	n.With(http.NotFoundHandler())
+	n.Use(http.NotFoundHandler())
 
 	req, err := http.NewRequest("GET", "http://localhost:3000/static_test.go", nil)
 	if err != nil {
@@ -87,10 +87,10 @@ func TestStaticBadDir(t *testing.T) {
 func TestStaticOptionsServeIndex(t *testing.T) {
 	rec := httptest.NewRecorder()
 
-	n := core.New()
+	n := nim.New()
 	s := NewStatic(http.Dir("."))
 	s.indexFile = "nimble.go"
-	n.WithHandler(s)
+	n.UseHandler(s)
 
 	req, err := http.NewRequest("GET", "http://localhost:3000/", nil)
 	if err != nil {
@@ -104,10 +104,10 @@ func TestStaticOptionsServeIndex(t *testing.T) {
 func TestStaticOptionsPrefix(t *testing.T) {
 	rec := httptest.NewRecorder()
 
-	n := core.New()
+	n := nim.New()
 	s := NewStatic(http.Dir("."))
 	s.prefix = "/public"
-	n.WithHandler(s)
+	n.UseHandler(s)
 
 	// Check file content behaviour
 	req, err := http.NewRequest("GET", "http://localhost:3000/public/static_test.go", nil)

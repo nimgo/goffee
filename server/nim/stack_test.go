@@ -1,4 +1,4 @@
-package core
+package nim
 
 import (
 	"net/http"
@@ -26,17 +26,17 @@ func TestStackServeHTTP(t *testing.T) {
 	result := ""
 
 	ns := New()
-	ns.WithHandlerFunc(func(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
+	ns.UseHandlerFunc(func(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 		result += "_1bef"
 		next(w, r)
 		result += "_1aft"
 	})
-	ns.WithHandlerFunc(func(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
+	ns.UseHandlerFunc(func(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 		result += "_2bef"
 		next(w, r)
 		result += "_2aft"
 	})
-	ns.WithHandlerFunc(func(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
+	ns.UseHandlerFunc(func(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 		result += "_3here"
 		w.WriteHeader(http.StatusBadRequest)
 	})
@@ -49,13 +49,13 @@ func TestStackServeHTTP(t *testing.T) {
 
 // Ensures that the middleware chain
 // can correctly return all of its handlers.
-func TestStackWithHandlerFunc(t *testing.T) {
+func TestStackUseHandlerFunc(t *testing.T) {
 	rec := httptest.NewRecorder()
 	ns := New()
 	handles := ns.handlers
 	expect(t, 0, len(handles))
 
-	ns.WithHandlerFunc(func(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
+	ns.UseHandlerFunc(func(w http.ResponseWriter, r *http.Request, next http.HandlerFunc) {
 		w.WriteHeader(http.StatusOK)
 	})
 
@@ -79,5 +79,5 @@ func TesStackWithNil(t *testing.T) {
 	}()
 
 	ns := New()
-	ns.With(nil)
+	ns.Use(nil)
 }

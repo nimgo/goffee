@@ -7,7 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/nimgo/nim/server/core"
+	"github.com/nimgo/nim/server/nim"
 )
 
 func TestLogger(t *testing.T) {
@@ -17,10 +17,10 @@ func TestLogger(t *testing.T) {
 	l := NewLogger()
 	l.Logger = log.New(buff, "[n.] ", 0)
 
-	n := core.New()
+	n := nim.New()
 	// replace log for testing
-	n.WithHandler(l)
-	n.WithFunc(func(w http.ResponseWriter, r *http.Request) {
+	n.UseHandler(l)
+	n.UseFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusNotFound)
 	})
 

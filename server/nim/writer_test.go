@@ -1,4 +1,4 @@
-package core
+package nim
 
 import (
 	"bufio"

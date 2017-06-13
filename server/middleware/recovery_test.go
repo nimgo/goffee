@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"reflect"
 
-	"github.com/nimgo/nim/server/core"
+	"github.com/nimgo/nim/server/nim"
 
 	"net/http/httptest"
 	"testing"
@@ -32,11 +32,11 @@ func TestRecovery(t *testing.T) {
 	recover := NewRecovery()
 	recover.logger = log.New(buff, "[n.] ", 0)
 
-	n := core.New()
+	n := nim.New()
 
 	// replace log for testing
-	n.WithHandler(recover)
-	n.WithFunc(func(http.ResponseWriter, *http.Request) {
+	n.UseHandler(recover)
+	n.UseFunc(func(http.ResponseWriter, *http.Request) {
 		panic("here is a panic!")
 	})
 

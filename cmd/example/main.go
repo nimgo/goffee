@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/nimgo/gomux"
-	"github.com/nimgo/nim/server"
+	"github.com/nimgo/nim/server/nim"
 )
 
 func main() {
@@ -18,11 +18,11 @@ func main() {
 
 	// Create a subrouter using mainRouter.Path(method, path)
 	// Add in the required middleware
-	pttMux := nim.SubPath(mux, "GET", "/protected/*path").
-		WithFunc(middlewareA).
-		WithFunc(middlewareB).
-		WithHandlerFunc(middlewareC).
-		SubMux()
+	pttStack := nim.SubPath(mux, "GET", "/protected/*path")
+	pttStack.UseFunc(middlewareA)
+	pttStack.UseFunc(middlewareB)
+	pttStack.UseHandlerFunc(middlewareC)
+	pttMux := pttStack.SubMux()
 	{
 		pttMux.GET("/protected/users/:id", appHandler("viewing: /protected/users/:id"))
 		pttMux.GET("/protected/users", appHandler("viewing: /protected/users"))
@@ -34,10 +34,11 @@ func main() {
 		auth.GET("/auth/boy/:id", appHandler("boy"))
 		auth.GET("/auth/girl", appHandler("girl"))
 	}
+
 	stack := nim.New()
-	stack.WithFunc(middlewareA)
-	stack.WithFunc(middlewareB)
-	stack.With(auth)
+	stack.UseFunc(middlewareA)
+	stack.UseFunc(middlewareB)
+	stack.Use(auth)
 
 	mux.GET("/auth/*stack", stack.ServeHTTP)
 
@@ -46,7 +47,7 @@ func main() {
 	mux.NotFound = &notfound{}
 
 	n := nim.New()
-	n.With(mux)
+	n.Use(mux)
 	nim.Run(n, ":3000")
 }
 

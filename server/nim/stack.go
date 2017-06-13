@@ -1,19 +1,13 @@
-package core
+package nim
 
 import (
 	"net/http"
-
-	"github.com/nimgo/gomux"
 )
 
-// SubMux returns an instance of gomux with a substack middleware
-func (s *Stack) SubMux() *gomux.Router {
-	submux := gomux.New()
-	s.With(submux)
-	return submux
-}
+// Make sure Stack conforms with the http.Handler interface
+var _ http.Handler = New()
 
-// New returns a new stack
+// New returns a core stack
 func New() *Stack {
 	return &Stack{}
 }
@@ -41,9 +35,6 @@ type middleware struct {
 	next *middleware
 }
 
-// Make sure Stack conforms with the http.Handler interface
-var _ http.Handler = New()
-
 // Stack itself is a http.Handler. This allows it to used as a substack manager
 func (n *Stack) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if _, ok := w.(Writer); ok { // handle substacks
@@ -53,30 +44,29 @@ func (n *Stack) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// With adds a http.Handler onto the middleware stack.
-func (n *Stack) With(handler http.Handler) *Stack {
-	return n.WithHandlerFunc(wrap(handler))
+// Use adds a http.Handler onto the middleware stack.
+func (n *Stack) Use(handler http.Handler) {
+	n.UseHandlerFunc(wrap(handler))
 }
 
-// WithFunc adds a http.HandlerFunc onto the middleware stack.
-func (n *Stack) WithFunc(handlerFunc http.HandlerFunc) *Stack {
-	return n.WithHandlerFunc(wrapHandlerFunc(handlerFunc))
+// UseFunc adds a http.HandlerFunc onto the middleware stack.
+func (n *Stack) UseFunc(handlerFunc http.HandlerFunc) {
+	n.UseHandlerFunc(wrapHandlerFunc(handlerFunc))
 }
 
-// WithHandler adds a Stack.Handler onto the middleware stack.
-func (n *Stack) WithHandler(handler Handler) *Stack {
-	return n.WithHandlerFunc(handler.ServeHTTP)
+// UseHandler adds a Stack.Handler onto the middleware stack.
+func (n *Stack) UseHandler(handler Handler) {
+	n.UseHandlerFunc(handler.ServeHTTP)
 }
 
-// WithHandlerFunc adds a Stack.HandlerFunc function onto the middleware stack.
-func (n *Stack) WithHandlerFunc(handlerFunc HandlerFunc) *Stack {
+// UseHandlerFunc adds a Stack.HandlerFunc function onto the middleware stack.
+func (n *Stack) UseHandlerFunc(handlerFunc HandlerFunc) {
 	if handlerFunc == nil {
 		panic("handlerFunc cannot be nil")
 	}
 
 	n.handlers = append(n.handlers, handlerFunc)
 	n.middleware = build(n.handlers)
-	return n
 }
 
 // The next http.HandlerFunc is automatically called after the Handler is executed.
