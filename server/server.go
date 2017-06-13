@@ -3,23 +3,36 @@ package server
 import (
 	"net/http"
 
-	"github.com/nimgo/goffee/server/anni"
+	"github.com/nimgo/goffee/server/kernal"
 	"github.com/nimgo/goffee/server/middleware"
+	"github.com/tylerb/graceful"
 )
 
+func serveFile(filename string) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, filename)
+	}
+}
+
 // StartServer is the entry point to start the server with configurations
-func StartServer() {
+func StartServer(config Configuration) {
 
-	nni := anni.New()
-	nni.UseHandler(middleware.NewColorLogger())
-	nni.UseHandler(middleware.NewRecovery())
-	nni.UseHandler(middleware.NewStatic(http.Dir("./public/")))
+	mux := kernal.NewMux()
+	mux.GET("/", serveFile("./webroot/index.html"))
+	mux.GET("/inline", func(w http.ResponseWriter, req *http.Request) {
+		w.Write([]byte("Hello from an inline func!"))
+	})
 
-	anni.Run(nni, ":3000")
+	krnl := kernal.New()
+	krnl.UseHandler(middleware.NewColorLogger())
+	krnl.UseHandler(middleware.NewRecovery())
+	krnl.UseHandler(middleware.NewStatic(http.Dir("./webroot/public/")))
 
-	// if c.DebugMode {
-	// 	web.Run(c.Server_Port) // Development
-	// } else {
-	// 	graceful.Run(c.Server_Port, c.Server_Timeout, web) // Production
-	// }
+	krnl.Use(mux)
+
+	if config.Debug {
+		kernal.Run(krnl, config.Host+":"+config.Port)
+	} else {
+		graceful.Run(config.Port, config.Graceful.Timeout, krnl) // Production
+	}
 }

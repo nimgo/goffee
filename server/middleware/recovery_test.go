@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"reflect"
 
-	"github.com/nimgo/goffee/server/anni"
+	"github.com/nimgo/goffee/server/kernal"
 
 	"net/http/httptest"
 	"testing"
@@ -32,7 +32,7 @@ func TestRecovery(t *testing.T) {
 	recover := NewRecovery()
 	recover.logger = log.New(buff, "[n.] ", 0)
 
-	n := anni.New()
+	n := kernal.New()
 
 	// replace log for testing
 	n.UseHandler(recover)

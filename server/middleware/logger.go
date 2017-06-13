@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/nimgo/goffee/server/anni"
+	"github.com/nimgo/goffee/server/kernal"
 )
 
 // ALogger interface
@@ -36,7 +36,7 @@ func (l *Logger) ServeHTTP(w http.ResponseWriter, r *http.Request, next http.Han
 
 	next(w, r)
 
-	ww := w.(anni.Writer)
+	ww := w.(kernal.Writer)
 
 	clientIP := "0.0.0.0"
 	latency := time.Since(start)

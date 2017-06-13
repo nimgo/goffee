@@ -1,4 +1,4 @@
-package anni
+package kernal
 
 import (
 	"log"
@@ -29,25 +29,8 @@ func (s *Stack) SubMux() *gomux.Router {
 
 // Run is a convenience function that runs the anni stack as an HTTP
 // server. The addr string takes the same format as http.ListenAndServe.
-func Run(ns *Stack, addr ...string) {
+func Run(ns *Stack, addr string) {
 	l := log.New(os.Stdout, "[n.] ", 0)
-	address := detectAddress(addr...)
-	l.Printf("Server is listening on %s", address)
-	l.Fatal(http.ListenAndServe(address, ns))
-}
-
-const (
-	// DefaultAddress is used if no other is specified.
-	defaultServerAddress = ":3000"
-)
-
-// detectAddress
-func detectAddress(addr ...string) string {
-	if len(addr) > 0 {
-		return addr[0]
-	}
-	if port := os.Getenv("PORT"); port != "" {
-		return ":" + port
-	}
-	return defaultServerAddress
+	l.Printf("Server is listening on %s", addr)
+	l.Fatal(http.ListenAndServe(addr, ns))
 }

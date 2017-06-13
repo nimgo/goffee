@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"fmt"
 	"net/http"
 	"path"
 	"strings"
@@ -11,7 +10,7 @@ import (
 func NewStatic(directory http.FileSystem) *Static {
 	return &Static{
 		dir:       directory,
-		prefix:    "",
+		prefix:    "public",
 		indexFile: "index.html",
 	}
 }
@@ -35,8 +34,6 @@ func (s *Static) ServeHTTP(rw http.ResponseWriter, r *http.Request, next http.Ha
 		return
 	}
 	file := r.URL.Path
-
-	fmt.Println(file)
 
 	// if we have a prefix, filter requests by stripping the prefix
 	if s.prefix != "" {

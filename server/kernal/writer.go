@@ -1,4 +1,4 @@
-package anni
+package kernal
 
 import (
 	"bufio"

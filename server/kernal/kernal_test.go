@@ -1,11 +1,11 @@
-package anni
+package kernal
 
 import (
 	"os"
 	"testing"
 )
 
-func TestAnniRun(t *testing.T) {
+func TestKernalRun(t *testing.T) {
 	// just test that Run doesn't bomb
 	go Run(New(), ":3000")
 }
