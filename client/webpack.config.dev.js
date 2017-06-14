@@ -24,8 +24,8 @@ module.exports = {
     },
 
     output: {
-        path: "./../public/",
-        filename: "dist/[name].[hash:6].dev.js",
+        path: "./../webroot",
+        filename: "public/dist/[name].[hash:6].dev.js",
         publicPath: "/"
     },
 
@@ -33,12 +33,12 @@ module.exports = {
         extensions: [ ".ts", ".js", ".json", ".css", ".scss", ".html" ]
     },
 
-    // webpack-devserver
-    devServer: {
-        historyApiFallback: true,
-        stats: "minimal",
-        outputPath: path.join(__dirname, "./../public")
-    },
+    // // webpack-devserver (nodejs express)
+    // devServer: {
+    //     historyApiFallback: true,
+    //     stats: "minimal",
+    //     outputPath: path.join(__dirname, "./../webroot/public")
+    // },
 
     module: {
         rules: [
@@ -78,11 +78,18 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(
             [
-                "./../public/css",
-                "./../public/dist",
-                "./../public/fonts",
-                "./../public/assets",
-            ]
+                "public/assets/css",
+                "public/assets/fonts",
+                "public/assets/js",
+                "public/assets/imgs",
+                "public/assets/ico",
+                "public/assets",
+                "public/dist",
+            ],
+            {
+                root: path.resolve(__dirname , './../webroot'),
+                verbose: true
+            }
         ),
 
         new webpack.optimize.CommonsChunkPlugin(
@@ -96,7 +103,7 @@ module.exports = {
                 chunks: ["polyfills", "vendor", "app"],
                 template: "ngapp/razor/App.cshtml",
                 inject: true,
-                filename: "./../public/app.html"
+                filename: "./index.html"
             }
         ),
 
@@ -105,18 +112,18 @@ module.exports = {
                 chunks: ["polyfills", "vendor", "app"],
                 template: "ngapp/razor/Admin.cshtml",
                 inject: true,
-                filename: "./../public/admin/index.html",
+                filename: "./admin/index.html"
             }
         ),
 
         new CopyWebpackPlugin([
-            { from: "ngapp/public/css/*.css", to: "css/", flatten: true },
-            { from: "ngapp/public/fonts/*.*", to: "fonts/", flatten: true },
-            { from: "ngapp/public/imgs/*.*", to: "imgs/", flatten: true },
-            { from: "ngapp/public/js/*.js", to: "js/", flatten: true },
-            { from: "ngapp/public/favicons/*", to: "", flatten: true },
-            { from: "node_modules/jquery/dist/jquery.min.js", to: "js/", flatten: true }, // because of datepicker
-            { from: "node_modules/bootstrap/dist/css/bootstrap.min.css.map", to: "css/", flatten: true },
+            { from: "ngapp/public/css/*.css", to: "public/assets/css/", flatten: true },
+            { from: "ngapp/public/fonts/*.*", to: "public/assets/fonts/", flatten: true },
+            { from: "ngapp/public/imgs/*.*", to: "public/assets/imgs/", flatten: true },
+            { from: "ngapp/public/js/*.js", to: "public/assets/js/", flatten: true },
+            { from: "ngapp/public/favicons/*", to: "public/assets/favico/", flatten: true },
+            { from: "node_modules/jquery/dist/jquery.min.js", to: "public/assets/js/", flatten: true }, // because of datepicker
+            { from: "node_modules/bootstrap/dist/css/bootstrap.min.css.map", to: "public/assets/css/", flatten: true },
         ])
     ]
 }

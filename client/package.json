@@ -5,9 +5,8 @@
   "license": "MIT",
   "scripts": {
     "gdeps": "npm list -g --depth=0",
-    "clean:dist": "rimraf gen wwwroot Views",
+    "clean:dist": "rimraf gen ./../webroot",
     "ngc": "ngc -p tsconfig.json",
-    "start": "concurrently \"webpack-dev-server --inline --progress --port 8080\" \"dotnet run \"",
     "build:dev": "set NODE_ENV=development && webpack --progress --profile --colors",
     "build:prod": "set NODE_ENV=production && webpack --progress --profile --bail",
     "build:aot": "npm run clean:dist && npm run ngc && npm run build:prod",

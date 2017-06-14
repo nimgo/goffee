@@ -7,10 +7,10 @@ import (
 )
 
 // NewStatic returns a new instance of Static
-func NewStatic(directory http.FileSystem) *Static {
+func NewStatic(prefix string, directory http.FileSystem) *Static {
 	return &Static{
 		dir:       directory,
-		prefix:    "public",
+		prefix:    prefix,
 		indexFile: "index.html",
 	}
 }

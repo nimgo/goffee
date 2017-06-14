@@ -22,11 +22,12 @@ func StartServer(config Configuration) {
 	mux.GET("/inline", func(w http.ResponseWriter, req *http.Request) {
 		w.Write([]byte("Hello from an inline func!"))
 	})
+	mux.GET("/admin", serveFile("./webroot/admin/index.html"))
 
 	krnl := kernal.New()
 	krnl.UseHandler(middleware.NewColorLogger())
 	krnl.UseHandler(middleware.NewRecovery())
-	krnl.UseHandler(middleware.NewStatic(http.Dir("./webroot/public/")))
+	krnl.UseHandler(middleware.NewStatic("/public", http.Dir("./webroot/public")))
 
 	krnl.Use(mux)
 
