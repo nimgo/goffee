@@ -1,1 +1,3 @@
 https://www.robinwieruch.de/minimal-react-webpack-babel-setup/
+
+http://andrewhfarmer.com/starter-project/
