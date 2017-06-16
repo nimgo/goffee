@@ -6,7 +6,7 @@ export const routes: Routes = [
         path: "",
         loadChildren: "./+main/main.module#MainModule"
     },
-    { path: "", redirectTo: "/", pathMatch: "full" },
+    //{ path: "", redirectTo: "/", pathMatch: "full" },
     { path: "**", redirectTo: "/", pathMatch: "full" },
 ];
 
