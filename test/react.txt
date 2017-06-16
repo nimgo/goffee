@@ -1,3 +1,14 @@
+*** Setting up a new Typescript 1.9 and React project
+http://blog.tomduncalf.com/posts/setting-up-typescript-and-react/
+
+The Minimal React Webpack Babel Setup
 https://www.robinwieruch.de/minimal-react-webpack-babel-setup/
+
+Optimizing React + ES6 + Webpack Production Build
+http://moduscreate.com/optimizing-react-es6-webpack-production-build/
+
+Full-Stack Redux Tutorial
+https://teropa.info/blog/2015/09/10/full-stack-redux-tutorial.html
+
 
 http://andrewhfarmer.com/starter-project/
