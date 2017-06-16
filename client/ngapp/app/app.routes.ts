@@ -6,7 +6,11 @@ export const routes: Routes = [
         path: "",
         loadChildren: "./+main/main.module#MainModule"
     },
-    //{ path: "", redirectTo: "/", pathMatch: "full" },
+    {
+        path: "admin",
+        loadChildren: "./+admin/admin.module#AdminModule"
+    },
+    { path: "", redirectTo: "/", pathMatch: "full" },
     { path: "**", redirectTo: "/", pathMatch: "full" },
 ];
 
