@@ -107,15 +107,6 @@ module.exports = {
             }
         ),
 
-        new HtmlWebpackPlugin(
-            {
-                chunks: ["polyfills", "vendor", "app"],
-                template: "ngapp/razor/Admin.cshtml",
-                inject: true,
-                filename: "./admin/index.html"
-            }
-        ),
-
         new CopyWebpackPlugin([
             { from: "ngapp/public/css/*.css", to: "public/assets/css/", flatten: true },
             { from: "ngapp/public/fonts/*.*", to: "public/assets/fonts/", flatten: true },

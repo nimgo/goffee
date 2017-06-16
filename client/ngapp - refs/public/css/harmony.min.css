@@ -1,0 +1,72 @@
+.app-logo {
+    height: 30px;
+    padding-right: 10px;
+}
+
+a, a:hover, a:visited, a:link, a:active {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.show-cursor {
+    cursor: pointer;
+}
+
+.ng-valid[required], .ng-valid.required {
+    border-left: 5px solid #5fe867; /* green */
+}
+
+.ng-invalid:not(form) {
+    border-left: 5px solid #e67d32; /* red */
+}
+
+pre {
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+.table>tbody>tr>td {
+    border-top: none;
+}
+
+
+table.nobordertop td {
+    border-top: none;
+}
+
+.marginTop30 {
+    margin-top: 30px;
+}
+
+.paddingTop30 {
+    padding-top: 30px;
+}
+.paddingLeft30 {
+    padding-left: 30px;
+}
+
+.paddingRight30 {
+    padding-right: 30px;
+}
+
+.paddingTop10 {
+    padding-top: 10px;
+}
+.paddingLeft10 {
+    padding-left: 10px;
+}
+.paddingRight10 {
+    padding-right: 10px;
+}
+
+.white-bg{
+    background:#ffffff !important;
+    border: none;
+}
+
+input[type=checkbox] {
+  transform: scale(2.0);
+}
