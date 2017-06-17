@@ -1,6 +1,6 @@
 {
   // NG2CompilerOptions: auto-generate ngfactories
-  // https: //github.com/angular/angular/blob/master/tools/%40angular/tsc-wrapped/src/options.ts
+  // https://github.com/angular/angular/blob/master/tools/%40angular/tsc-wrapped/src/options.ts
   "angularCompilerOptions": {
     "genDir": "gen/ngfactory",
     "skipMetadataEmit": true,
@@ -8,28 +8,33 @@
     "debug": true
   },
 
-  "compilerOptions": {
-    "target": "es5",
+  //Useful ts compiler options, even though its for react.
+  //http://blog.tomduncalf.com/posts/setting-up-typescript-and-react/
+  "compilerOptions": {    
     "module": "commonjs",
+    "target": "es5",
     "moduleResolution": "node",
-    "sourceMap": false,
+    //"baseUrl": "ngsrc",
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "outDir": "gen/es5",
+
     "strictNullChecks": true,
     "removeComments": true,
-    "noImplicitAny": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "suppressImplicitAnyIndexErrors": true,
     "skipLibCheck": true,
     "lib": [ "es5", "es2015", "dom" ],
-    "types": [ "node" ],
-    "outDir": "gen/js"
+    "types": [ "node" ]
   },
 
+  "include": [
+    "ngsrc/**/*.ts"
+  ],
+
   "exclude": [
-    //"ngApp/main.aot.ts",
-    "node_modules",
-    "gen/ngfactory",
-    "**/*.spec.ts"
+    "ngsrc/**/*.spec.ts"
   ],
 
   "compileOnSave": false,

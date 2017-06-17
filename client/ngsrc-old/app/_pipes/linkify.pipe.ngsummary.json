@@ -1,0 +1,1 @@
+{"summaries":[{"symbol":{"__symbol":0},"metadata":{"__symbolic":"class"},"type":{"summaryKind":0,"type":{"reference":{"__symbol":0},"diDeps":[],"lifecycleHooks":[]},"name":"linkify","pure":true}}],"symbols":[{"__symbol":0,"name":"LinkifyPipe","filePath":"E:/Go/go.modules/src/github.com/nimgo/goffee/client/ngapp/app/_pipes/linkify.pipe.d.ts"}]}

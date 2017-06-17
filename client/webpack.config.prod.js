@@ -20,9 +20,9 @@ module.exports = {
     },
 
     entry: {
-        "polyfills": "./ngapp/polyfills.ts",
-        "vendor": "./ngapp/vendor.ts",
-        "app": "./ngapp/startup.aot.ts"
+        "polyfills": "./ngsrc/polyfills.ts",
+        "vendor": "./ngsrc/vendor.ts",
+        "app": "./ngsrc/startup.aot.ts"
     },
 
     output: {
@@ -119,18 +119,18 @@ module.exports = {
         new HtmlWebpackPlugin(
             {
                 chunks: ["polyfills", "vendor", "app"],
-                template: "ngApp/razor/App.cshtml",
+                template: "ngsrc/razor/App.cshtml",
                 inject: true,
                 filename: "./index.html",
             }
         ),
 
         new CopyWebpackPlugin([
-            { from: "ngapp/public/css/*.*", to: "public/assets/css/", flatten: true },
-            { from: "ngapp/public/fonts/*.*", to: "public/assets/fonts/", flatten: true },
-            { from: "ngapp/public/imgs/*.*", to: "public/assets/imgs/", flatten: true },
-            { from: "ngapp/public/js/*.*", to: "public/assets/js/", flatten: true },
-            { from: "ngapp/public/favicons/*", to: "public/assets/ico", flatten: true },
+            { from: "ngsrc/public/css/*.*", to: "public/assets/css/", flatten: true },
+            { from: "ngsrc/public/fonts/*.*", to: "public/assets/fonts/", flatten: true },
+            { from: "ngsrc/public/imgs/*.*", to: "public/assets/imgs/", flatten: true },
+            { from: "ngsrc/public/js/*.*", to: "public/assets/js/", flatten: true },
+            { from: "ngsrc/public/favicons/*", to: "public/assets/ico", flatten: true },
             { from: "node_modules/jquery/dist/jquery.min.js", to: "public/assets/js/", flatten: true }, // because of datepicker
             { from: "node_modules/bootstrap/dist/css/bootstrap.min.css.map", to: "public/assets/css/", flatten: true },
         ])
