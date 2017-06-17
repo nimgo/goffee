@@ -1,5 +1,9 @@
 var environment = (process.env.NODE_ENV || "development").trim();
 
+console.log("------------------------------------------------------");
+console.log("Build: ", environment.toUpperCase());
+console.log("------------------------------------------------------");
+
 if (environment === "development") {
     module.exports = require("./webpack.config.dev.js");
 } else {
