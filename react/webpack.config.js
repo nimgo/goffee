@@ -7,7 +7,7 @@ var CleanWebpackPlugin = require("clean-webpack-plugin");
 
 var dist = path.resolve(__dirname, "dist");
 
-module.exports = {
+var commons = {
   
   devtool: "eval", // "source-map"
 
@@ -16,8 +16,9 @@ module.exports = {
   },
   
   entry: {
-    //"webpack-dev-server/client?http://localhost:8080",
-    "app": "./src/index.tsx"
+    "polyfills": "./src/polyfills.ts",
+    "vendor": "./src/vendor.ts",
+    "app": "./src/app.tsx"
   },
 
   output: {
@@ -65,20 +66,21 @@ module.exports = {
 
   plugins: [
 
-        // new CleanWebpackPlugin(
-        //     [
-        //         "./public/assets/css",
-        //         "./public/assets/favico",
-        //         "./public/assets/fonts",
-        //         "./public/assets/imgs",
-        //         "./public/assets/js",
-        //         "./public/assets"
-        //     ],
-        //     {
-        //         root: dist,
-        //         verbose: true
-        //     }
-        // ),		
+        new CleanWebpackPlugin(
+            [
+                "./assets/css",
+                "./assets/favico",
+                "./assets/fonts",
+                "./assets/imgs",
+                "./assets/js",
+                "./assets",
+                "./*",
+            ],
+            {
+                root: dist,
+                verbose: true
+            }
+        ),		
 
         new webpack.optimize.CommonsChunkPlugin(
             {
@@ -88,31 +90,22 @@ module.exports = {
 
         new HtmlWebpackPlugin(
             {
-                chunks: ["app"],
+                chunks: ["polyfills", "vendor", "app"],
                 template: "./resources/razor/index.html",
                 inject: true,
                 filename: "./index.html",
             }
         ),
 
-        // new HtmlWebpackPlugin(
-        //     {
-        //         chunks: ["polyfills", "vendor", "app"],
-        //         template: "ngsrc/razor/app.cshtml",
-        //         inject: true,
-        //         filename: "./index.html",
-        //     }
-        // ),
-
-        // new CopyWebpackPlugin([
-        //     { from: "resources/css/*.*", to: "public/assets/css/", flatten: true },
-        //     { from: "resources/fonts/*.*", to: "public/assets/fonts/", flatten: true },
-        //     { from: "resources/imgs/*.*", to: "public/assets/imgs/", flatten: true },
-        //     { from: "resources/js/*.*", to: "public/assets/js/", flatten: true },
-        //     { from: "resources/favicons/*", to: "public/assets/ico", flatten: true },
-        //     { from: "node_modules/jquery/dist/jquery.min.js", to: "public/assets/js/", flatten: true }, // because of datepicker
-        //     { from: "node_modules/bootstrap/dist/css/bootstrap.min.css.map", to: "public/assets/css/", flatten: true },
-        // ])
+        new CopyWebpackPlugin([
+            { from: "resources/css/*.*", to: "assets/css/", flatten: true },
+            { from: "resources/fonts/*.*", to: "assets/fonts/", flatten: true },
+            { from: "resources/imgs/*.*", to: "assets/imgs/", flatten: true },
+            { from: "resources/js/*.*", to: "assets/js/", flatten: true },
+            { from: "resources/favico/*", to: "assets/favico", flatten: true },
+            // { from: "node_modules/jquery/dist/jquery.min.js", to: "assets/js/", flatten: true }, // because of datepicker
+            // { from: "node_modules/bootstrap/dist/css/bootstrap.min.css.map", to: "assets/css/", flatten: true },
+        ])
   ],
   
   devServer: {
@@ -121,3 +114,20 @@ module.exports = {
     port: 3000
   }
 };
+
+var environment = (process.env.NODE_ENV || "development").trim();
+var merge = require('webpack-merge');
+
+console.log("------------------------------------------------------");
+console.log("Build: ", environment.toUpperCase());
+console.log("------------------------------------------------------");
+
+var configs = { };
+
+if (environment === "development") {
+  //configs = require("./webpack.config.dev.js");
+} else {
+  //configs = require("./webpack.config.prod.js");
+}
+
+module.exports = merge(commons, configs);
