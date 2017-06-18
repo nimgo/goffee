@@ -1,6 +1,6 @@
 # System caches
-Thumbs.db # Windows thumbnail db
-.DS_Store # OSX files
+Thumbs.db 
+.DS_Store 
 
 # Intellij project files
 *.iml

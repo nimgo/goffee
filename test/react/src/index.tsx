@@ -1,9 +1,15 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-const title: string = 'Msssy xxssss Minimal React Webpack Babel Setup';
+import { Hello } from "./components/Hello";
+
+const title: string = '...';
 
 ReactDOM.render(
-  <div>{title}</div>,
+  <div>
+    <Hello compiler={title} framework="React" />
+    <span>root</span>
+  </div>
+  ,
   document.getElementById('app')
 );
