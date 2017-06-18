@@ -1,5 +1,7 @@
 *** Setting up a new Typescript 1.9 and React project
 http://blog.tomduncalf.com/posts/setting-up-typescript-and-react/
+https://github.com/tomduncalf/typescript-react-template
+
 
 The Minimal React Webpack Babel Setup
 https://www.robinwieruch.de/minimal-react-webpack-babel-setup/
