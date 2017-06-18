@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom';
 
 import { Hello } from "./components/Hello";
 
-const title: string = '...';
+const title: string = "funny business";
 
 ReactDOM.render(
   <div>
