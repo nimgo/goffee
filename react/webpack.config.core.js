@@ -1,18 +1,14 @@
 var webpack = require('webpack');
-var path = require('path');
-
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 var CopyWebpackPlugin = require("copy-webpack-plugin");
-var CleanWebpackPlugin = require("clean-webpack-plugin");
 
+var path = require('path');
 var dist = path.resolve(__dirname, "dist");
 
 var commons = {
   
-  devtool: "eval", // "source-map"
-
   performance: {
-      hints: "warning"
+      hints: false
   },
   
   entry: {
@@ -21,11 +17,6 @@ var commons = {
     "app": "./src/app.tsx"
   },
 
-  output: {
-    filename: "[name].[hash:6].dev.js",
-    path: dist
-  },
-  
   resolve: {
     extensions: [
       ".ts", ".tsx", 
@@ -66,28 +57,6 @@ var commons = {
 
   plugins: [
 
-        new CleanWebpackPlugin(
-            [
-                "./assets/css",
-                "./assets/favico",
-                "./assets/fonts",
-                "./assets/imgs",
-                "./assets/js",
-                "./assets",
-                "./*",
-            ],
-            {
-                root: dist,
-                verbose: true
-            }
-        ),		
-
-        new webpack.optimize.CommonsChunkPlugin(
-            {
-                name: [ "app" ]
-            }
-        ),
-
         new HtmlWebpackPlugin(
             {
                 chunks: ["polyfills", "vendor", "app"],
@@ -125,9 +94,9 @@ console.log("------------------------------------------------------");
 var configs = { };
 
 if (environment === "development") {
-  //configs = require("./webpack.config.dev.js");
+  configs = require("./webpack.config.dev.js");
 } else {
-  //configs = require("./webpack.config.prod.js");
+  configs = require("./webpack.config.prod.js");
 }
 
 module.exports = merge(commons, configs);
