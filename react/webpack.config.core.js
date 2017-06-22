@@ -14,7 +14,7 @@ var commons = {
   entry: {
     "polyfills": "./src/polyfills.ts",
     "vendor": "./src/vendor.ts",
-    "app": "./src/app.tsx"
+    "app": "./src/start.ts"
   },
 
   resolve: {
