@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 var CopyWebpackPlugin = require("copy-webpack-plugin");
 
@@ -14,7 +15,7 @@ var commons = {
   entry: {
     "polyfills": "./src/polyfills.ts",
     "vendor": "./src/vendor.ts",
-    "app": "./src/start.ts"
+    "app": "./src/startup.tsx"
   },
 
   resolve: {
