@@ -55,7 +55,7 @@ var commons = {
 
         new HtmlWebpackPlugin(
             {
-                chunks: ["app", "vendor", "polyfills"],
+                chunks: ["polyfills", "vendor", "app"],
                 template: "./resources/razor/index.html",
                 inject: true,
                 filename: "./index.html",

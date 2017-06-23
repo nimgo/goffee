@@ -1,3 +1,5 @@
 gen
 stats.json
+package-lock.json
 node_modules
+dist

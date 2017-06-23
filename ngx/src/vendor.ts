@@ -1,3 +1,6 @@
+import "zone.js";
+import "reflect-metadata";
+
 import "@angular/core";
 import "@angular/platform-browser";
 import "@angular/common";
