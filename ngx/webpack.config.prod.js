@@ -1,25 +1,20 @@
-var webpack = require("webpack");
-var merge = require("webpack-merge");
+var webpack = require('webpack');
+var CleanWebpackPlugin = require("clean-webpack-plugin");
 
-var commons = require("./webpack.config.common.js");
+var path = require('path');
+var dist = path.resolve(__dirname, "dist");
 
-module.exports = merge(commons, {
-
-    performance: {
-        hints: false
-    },
+module.exports = {
 
     output: {
-        path: "./../webroot",
-        filename: "public/dist/[name].[hash:6].prod.min.js",
-        publicPath: "/"
+        filename: "[name].[hash:6].prod.min.js",
+        path: dist
     },
 
     module: {
         rules: [
             {
                 test: /\.ts$/,
-                //exclude: /node_modules/,
                 loaders: [
                     "awesome-typescript-loader",
                     "angular2-template-loader",
@@ -32,6 +27,28 @@ module.exports = merge(commons, {
     plugins: [
 
         new webpack.NoErrorsPlugin(),
+
+        new webpack.optimize.CommonsChunkPlugin(
+            {
+                name: [ "app", "vendor", "polyfills" ]
+            }
+        ),
+        
+        new CleanWebpackPlugin(
+            [
+                "./assets/css",
+                "./assets/favico",
+                "./assets/fonts",
+                "./assets/imgs",
+                "./assets/js",
+                "./assets",
+                "./*",
+            ],
+            {
+                root: dist,
+                verbose: true
+            }
+        ),		
 
         new webpack.optimize.UglifyJsPlugin(
             {
@@ -47,4 +64,4 @@ module.exports = merge(commons, {
             }
         ),
     ]
-})
+}

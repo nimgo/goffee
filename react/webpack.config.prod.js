@@ -15,6 +15,12 @@ module.exports = {
 
       new webpack.NoErrorsPlugin(),
 
+    new webpack.optimize.CommonsChunkPlugin(
+        {
+            name: [ "app", "vendor", "polyfills" ]
+        }
+    ),
+    
       new CleanWebpackPlugin(
           [
               "./assets/css",
@@ -31,11 +37,6 @@ module.exports = {
           }
       ),		
 
-      new webpack.optimize.CommonsChunkPlugin(
-          {
-              name: [ "app" ]
-          }
-      ),
 
       new webpack.optimize.UglifyJsPlugin(
           {

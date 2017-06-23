@@ -1,34 +1,25 @@
 var webpack = require("webpack");
-var merge = require('webpack-merge');
 
-var commons = require("./webpack.config.common.js");
+var path = require('path');
+var dist = path.resolve(__dirname, "dist");
 
-module.exports = merge(commons, {
+module.exports = {
 
-    devtool: "source-map",
+    devtool: "eval", // "source-map"
 
     performance: {
-        hints: true
+        hints: "warning"
     },
 
     output: {
-        path: "./../webroot",
-        filename: "public/dist/[name].[hash:6].dev.js",
-        publicPath: "/"
+        filename: "[name].[hash:6].dev.min.js",
+        path: dist
     },
-
-    // // webpack-devserver (nodejs express)
-    // devServer: {
-    //     historyApiFallback: true,
-    //     stats: "minimal",
-    //     outputPath: path.join(__dirname, "./../webroot/public")
-    // },
 
     module: {
         rules: [
             {
                 test: /\.ts$/,
-                //exclude: /node_modules/,
                 loaders: [
                     "awesome-typescript-loader",
                     "angular2-template-loader",
@@ -37,5 +28,5 @@ module.exports = merge(commons, {
                 ]
             }
         ]
-    },
-})
+    }
+}

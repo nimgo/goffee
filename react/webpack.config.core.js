@@ -51,8 +51,12 @@ var commons = {
         {
           test: /\.html$/,
           use: "raw-loader"
-        }
-      
+        },
+        // {
+        //   test: /\.(png|jpg|gif|ico|woff|woff2|ttf|svg|eot)$/,
+        //   exclude: /node_modules/,
+        //   loader: "file-loader?name=assets/[name]-[hash:6].[ext]"
+        // }
     ]
   },
 
@@ -60,7 +64,7 @@ var commons = {
 
         new HtmlWebpackPlugin(
             {
-                chunks: ["polyfills", "vendor", "app"],
+                chunks: ["app", "vendor", "polyfills"],
                 template: "./resources/razor/index.html",
                 inject: true,
                 filename: "./index.html",

@@ -30,11 +30,11 @@
   },
 
   "include": [
-    "ngsrc/**/*.ts"
+    "src/**/*.ts"
   ],
 
   "exclude": [
-    "ngsrc/**/*.spec.ts"
+    "src/**/*.spec.ts"
   ],
 
   "compileOnSave": false,
