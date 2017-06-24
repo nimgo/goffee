@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "set NODE_ENV=production && webpack --progress --profile --colors --config ./webpack.config.core.js",
+    "build:dev": "webpack --progress --profile --colors --config ./webpack.config.core.js",
     "start": "webpack-dev-server --progress --colors --hot --config ./webpack.config.core.js"
   },
   "keywords": [],

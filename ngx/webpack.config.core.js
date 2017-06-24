@@ -14,9 +14,9 @@ var commons = {
     },
 
     entry: {
-    "polyfills": "./src/polyfills.ts",
+    "app": "./src/startup.ts",
     "vendor": "./src/vendor.ts",
-    "app": "./src/startup.ts"
+    "polyfills": "./src/polyfills.ts"
     },
 
     resolve: {
@@ -55,7 +55,7 @@ var commons = {
 
         new HtmlWebpackPlugin(
             {
-                chunks: ["polyfills", "vendor", "app"],
+                chunks: ["app", "vendor", "polyfills"],
                 template: "./resources/razor/index.html",
                 inject: true,
                 filename: "./index.html",

@@ -5,7 +5,7 @@ var dist = path.resolve(__dirname, "dist");
 
 module.exports = {
 
-  devtool: "eval", // "source-map"
+  devtool: "source-map", //"eval",
   //devtool: "source-map",
 
   performance: {

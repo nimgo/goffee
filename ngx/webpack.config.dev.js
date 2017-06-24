@@ -5,14 +5,14 @@ var dist = path.resolve(__dirname, "dist");
 
 module.exports = {
 
-    devtool: "eval", // "source-map"
+    devtool: "source-map", //"eval",
 
     performance: {
         hints: "warning"
     },
 
     output: {
-        filename: "public/[name].[hash:6].dev.min.js",
+        filename: "[name].[hash:6].dev.min.js",
         path: dist,
         publicPath: "/"
     },
