@@ -12,7 +12,7 @@ module.exports = {
     },
 
     output: {
-        filename: "[name].[hash:6].dev.min.js",
+        filename: "public/[name].[hash:6].dev.min.js",
         path: dist,
         publicPath: "/"
     },

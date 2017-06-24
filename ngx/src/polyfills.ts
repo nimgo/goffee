@@ -1,3 +1,5 @@
+//import "zone.js";
+import "reflect-metadata";
 
 import 'ie-shim';
 import 'core-js/es6/object';

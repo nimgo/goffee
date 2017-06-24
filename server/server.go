@@ -18,7 +18,7 @@ func serveFile(filename string) http.HandlerFunc {
 func StartServer(config Configuration) {
 
 	mux := kernal.NewMux()
-	mux.GET("/", serveFile("./webroot/index.html"))
+	mux.GET("/", serveFile("./ngx/dist/index.html"))
 	mux.GET("/inline", func(w http.ResponseWriter, req *http.Request) {
 		w.Write([]byte("Hello from an inline func!"))
 	})
@@ -27,7 +27,7 @@ func StartServer(config Configuration) {
 	krnl := kernal.New()
 	krnl.UseHandler(middleware.NewColorLogger())
 	krnl.UseHandler(middleware.NewRecovery())
-	krnl.UseHandler(middleware.NewStatic("/public", http.Dir("./webroot/public")))
+	krnl.UseHandler(middleware.NewStatic("/public", http.Dir("./ngx/dist/public")))
 
 	krnl.Use(mux)
 
