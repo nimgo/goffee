@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "build": "webpack --progress --profile --colors --config ./webpack.config.core.js",
-    "build:prod": "npm run clean && set NODE_ENV=production && npm run build",
+    "build:prod": "npm run clean && cross-env NODE_ENV=production npm run build",
     "watch": "npm run build -- --watch",
     "start": "webpack-dev-server --progress --colors --hot --config ./webpack.config.core.js"
   },
@@ -28,6 +28,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "clean-webpack-plugin": "^0.1.16",
     "copy-webpack-plugin": "^4.0.1",
+    "cross-env": "^5.0.1",
     "html-webpack-plugin": "^2.29.0",
     "raw-loader": "^0.5.1",
     "rimraf": "^2.6.1",
