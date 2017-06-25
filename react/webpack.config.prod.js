@@ -22,9 +22,10 @@ module.exports = {
 
  		new webpack.NoErrorsPlugin(),
 
+		// defines the sequence of injection
     new webpack.optimize.CommonsChunkPlugin(
 			{
-				name: [ "app", "vendor", "polyfills" ]
+				name: ["app", "vendor", "polyfills"]
 			}
     ),
 
