@@ -2,7 +2,7 @@
   // NG2CompilerOptions: auto-generate ngfactories
   // https://github.com/angular/angular/blob/master/tools/%40angular/tsc-wrapped/src/options.ts
   "angularCompilerOptions": {
-    "genDir": "gen/ngfactory",
+    "genDir": "gen/aot",
     "skipMetadataEmit": true,
     "trace": true,
     "debug": true
@@ -14,7 +14,7 @@
     "module": "commonjs",
     "target": "es5",
     "moduleResolution": "node",
-    //"baseUrl": "ngsrc",
+    "baseUrl": "src",
     "noImplicitAny": true,
     "sourceMap": true,
     "outDir": "gen/es5",

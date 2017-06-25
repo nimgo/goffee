@@ -18,7 +18,7 @@ module.exports = {
 				loaders: [
 						"awesome-typescript-loader",
 						"angular2-template-loader",
-						"angular-router-loader?aot=true&genDir=gen/ngfactory"
+						"angular-router-loader?aot=true&genDir=gen/aot"
 				]
 			}
 		]
@@ -26,7 +26,7 @@ module.exports = {
 
 	plugins: [
 
-		new webpack.NoErrorsPlugin(),
+		new webpack.NoEmitOnErrorsPlugin(),
 
 		// defines the sequence for script injection
 		new webpack.optimize.CommonsChunkPlugin(
