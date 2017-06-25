@@ -13,10 +13,10 @@ module.exports = {
   },
 
   output: {
-    filename: "[name].[hash:6].dev.min.js",
+    filename: "scripts/[name].[hash:6].dev.min.js",
     path: dist
   },
-    
+
   devServer: {
     contentBase: dist,
     inline: true,
