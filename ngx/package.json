@@ -8,7 +8,7 @@
     "ngc": "ngc -p tsconfig.json",
     "clean": "rimraf gen dist",
     "build": "webpack --progress --profile --colors --config ./webpack.config.core.js",
-    "build:prod": "npm run clean && npm run ngc && set NODE_ENV=production && npm run build",
+    "build:prod": "npm run clean && npm run ngc && cross-env NODE_ENV=production npm run build",
     "watch": "npm run build -- --watch",
     "start": "webpack-dev-server --progress --colors --hot --config ./webpack.config.core.js"
   },
@@ -47,6 +47,7 @@
     "clean-webpack-plugin": "^0.1.16",
     "concurrently": "^3.5.0",
     "copy-webpack-plugin": "^4.0.1",
+    "cross-env": "^5.0.1",
     "css-loader": "^0.28.4",
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.29.0",
