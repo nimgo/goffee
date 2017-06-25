@@ -11,12 +11,6 @@ module.exports = {
 		hints: "warning"
 	},
 
-  entry: {
-    "app": "./src/startup.ts",
-    "vendor": "./src/vendor.ts",
-    "polyfills": "./src/polyfills.ts"
-  },
-
 	output: {
 		filename: "scripts/[name].[hash:6].dev.min.js",
 		path: dist,

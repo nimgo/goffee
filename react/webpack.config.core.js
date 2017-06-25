@@ -6,6 +6,11 @@ var CopyWebpackPlugin = require("copy-webpack-plugin");
 var path = require('path');
 var dist = path.resolve(__dirname, "dist");
 
+var environment = (process.env.NODE_ENV || "development").trim();
+console.log("------------------------------------------------------");
+console.log("Build: ", environment.toUpperCase());
+console.log("------------------------------------------------------");
+
 var commons = {
   
   performance: {
@@ -85,19 +90,12 @@ var commons = {
   
 };
 
-var environment = (process.env.NODE_ENV || "development").trim();
-var merge = require('webpack-merge');
-
-console.log("------------------------------------------------------");
-console.log("Build: ", environment.toUpperCase());
-console.log("------------------------------------------------------");
-
 var configs = { };
-
 if (environment === "development") {
   configs = require("./webpack.config.dev.js");
 } else {
   configs = require("./webpack.config.prod.js");
 }
 
+var merge = require('webpack-merge');
 module.exports = merge(commons, configs);

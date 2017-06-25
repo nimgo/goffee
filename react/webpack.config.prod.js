@@ -20,7 +20,7 @@ module.exports = {
 			}
 		}),
 
- 		new webpack.NoErrorsPlugin(),
+ 		new webpack.NoEmitOnErrorsPlugin(),
 
 		// defines the sequence of injection
     new webpack.optimize.CommonsChunkPlugin(

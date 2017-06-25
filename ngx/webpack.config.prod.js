@@ -6,12 +6,6 @@ var dist = path.resolve(__dirname, "dist");
 
 module.exports = {
 
-  entry: {
-    "app": "./src/startup.aot.ts",
-    "vendor": "./src/vendor.ts",
-    "polyfills": "./src/polyfills.ts"
-  },
-
 	output: {
 		filename: "scripts/[name].[hash:6].prod.min.js",
 		path: dist
@@ -34,9 +28,10 @@ module.exports = {
 
 		new webpack.NoErrorsPlugin(),
 
+		// defines the sequence for script injection
 		new webpack.optimize.CommonsChunkPlugin(
 			{
-					name: [ "app", "vendor", "polyfills" ]
+					name: ["app", "vendor", "polyfills"]
 			}
 		),
 

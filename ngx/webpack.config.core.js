@@ -7,10 +7,22 @@ var CopyWebpackPlugin = require("copy-webpack-plugin");
 var path = require("path");
 var dist = path.resolve(__dirname, "dist");
 
+var environment = (process.env.NODE_ENV || "development").trim();
+var production = environment === "production";
+console.log("------------------------------------------------------");
+console.log("Build: ", environment.toUpperCase());
+console.log("------------------------------------------------------");
+
 var commons = {
 
   performance: {
     hints: false
+  },
+
+  entry: {
+    "app": production ? "./src/startup.aot.ts" : "./src/startup.ts",
+    "vendor": "./src/vendor.ts",
+    "polyfills": "./src/polyfills.ts"
   },
 
 	resolve: {
@@ -67,22 +79,14 @@ var commons = {
 			// { from: "node_modules/bootstrap/dist/css/bootstrap.min.css.map", to: "public/assets/css/", flatten: true },
 		])
 	]
-
-}
-
-var environment = (process.env.NODE_ENV || "development").trim();
-var merge = require('webpack-merge');
-
-console.log("------------------------------------------------------");
-console.log("Build: ", environment.toUpperCase());
-console.log("------------------------------------------------------");
+};
 
 var configs = { };
-
 if (environment === "development") {
   configs = require("./webpack.config.dev.js");
 } else {
   configs = require("./webpack.config.prod.js");
 }
 
+var merge = require('webpack-merge');
 module.exports = merge(commons, configs);
