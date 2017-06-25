@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Hello } from "./components/Hello";
 
-const title: string = "funny98888business";
+const title: string = "funn11118business";
 
 // 'AppProps' describes the shape of props.
 // State is never set so we use the 'undefined' type.
