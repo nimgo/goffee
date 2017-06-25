@@ -5,12 +5,11 @@
   "license": "MIT",
   "scripts": {
     "gdeps": "npm list -g --depth=0",
-    "clean": "rimraf gen dist",
     "ngc": "ngc -p tsconfig.json",
-    "build": "set NODE_ENV=production && webpack --progress --profile --colors --bail --config ./webpack.config.core.js",
-    "build:clean": "npm run clean && npm run ngc && npm run build",
-    "build:dev": "webpack --progress --profile --colors --config ./webpack.config.core.js",
-    "watch": "npm run clean && npm run build:dev -- --watch",
+    "clean": "rimraf gen dist",
+    "build": "webpack --progress --profile --colors --config ./webpack.config.core.js",
+    "build:prod": "npm run clean && npm run ngc && set NODE_ENV=production && npm run build",
+    "watch": "npm run build -- --watch",
     "start": "webpack-dev-server --progress --colors --hot --config ./webpack.config.core.js"
   },
   "dependencies": {

@@ -6,62 +6,68 @@ var dist = path.resolve(__dirname, "dist");
 
 module.exports = {
 
-    output: {
-        filename: "[name].[hash:6].prod.min.js",
-        path: dist
-    },
+  entry: {
+    "app": "./src/startup.aot.ts",
+    "vendor": "./src/vendor.ts",
+    "polyfills": "./src/polyfills.ts"
+  },
 
-    module: {
-        rules: [
-            {
-                test: /\.ts$/,
-                loaders: [
-                    "awesome-typescript-loader",
-                    "angular2-template-loader",
-                    "angular-router-loader?aot=true&genDir=gen/ngfactory"
-                ]
-            }
-        ]
-    },
+	output: {
+		filename: "public/[name].[hash:6].prod.min.js",
+		path: dist
+	},
 
-    plugins: [
+	module: {
+		rules: [
+			{
+				test: /\.ts$/,
+				loaders: [
+						"awesome-typescript-loader",
+						"angular2-template-loader",
+						"angular-router-loader?aot=true&genDir=gen/ngfactory"
+				]
+			}
+		]
+	},
 
-        new webpack.NoErrorsPlugin(),
+	plugins: [
 
-        new webpack.optimize.CommonsChunkPlugin(
-            {
-                name: [ "app", "vendor", "polyfills" ]
-            }
-        ),
-        
-        new CleanWebpackPlugin(
-            [
-                "./assets/css",
-                "./assets/favico",
-                "./assets/fonts",
-                "./assets/imgs",
-                "./assets/js",
-                "./assets",
-                "./*",
-            ],
-            {
-                root: dist,
-                verbose: true
-            }
-        ),		
+		new webpack.NoErrorsPlugin(),
 
-        new webpack.optimize.UglifyJsPlugin(
-            {
-                compress: {
-                    warnings: false
-                },
-                output: {
-                    comments: false
-                },
-                sourceMap: {
-                    warnings: false
-                }
-            }
-        ),
-    ]
+		new webpack.optimize.CommonsChunkPlugin(
+			{
+					name: [ "app", "vendor", "polyfills" ]
+			}
+		),
+
+		new CleanWebpackPlugin(
+			[
+				"./assets/css",
+				"./assets/favico",
+				"./assets/fonts",
+				"./assets/imgs",
+				"./assets/js",
+				"./assets",
+				"./*",
+			],
+			{
+				root: dist,
+				verbose: true
+			}
+		),
+
+		new webpack.optimize.UglifyJsPlugin(
+			{
+				compress: {
+					warnings: false
+				},
+				output: {
+					comments: false
+				},
+				sourceMap: {
+					warnings: false
+				}
+			}
+		),
+	]
 }

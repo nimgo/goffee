@@ -5,29 +5,41 @@ var dist = path.resolve(__dirname, "dist");
 
 module.exports = {
 
-    devtool: "source-map", //"eval",
+	devtool: "source-map", //"eval",
 
-    performance: {
-        hints: "warning"
-    },
+	performance: {
+		hints: "warning"
+	},
 
-    output: {
-        filename: "[name].[hash:6].dev.min.js",
-        path: dist,
-        publicPath: "/"
-    },
+  entry: {
+    "app": "./src/startup.ts",
+    "vendor": "./src/vendor.ts",
+    "polyfills": "./src/polyfills.ts"
+  },
 
-    module: {
-        rules: [
-            {
-                test: /\.ts$/,
-                loaders: [
-                    "awesome-typescript-loader",
-                    "angular2-template-loader",
-                    "angular-router-loader",
-                    "source-map-loader"
-                ]
-            }
-        ]
-    }
+	output: {
+		filename: "public/[name].[hash:6].dev.min.js",
+		path: dist,
+		publicPath: "/"
+	},
+
+	module: {
+		rules: [
+			{
+				test: /\.ts$/,
+				loaders: [
+						"awesome-typescript-loader",
+						"angular2-template-loader",
+						"angular-router-loader",
+						"source-map-loader"
+				]
+			}
+		]
+	},
+
+  devServer: {
+    contentBase: dist,
+    inline: true,
+    port: 3000
+  }
 }

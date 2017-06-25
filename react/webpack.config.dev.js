@@ -9,12 +9,17 @@ module.exports = {
   //devtool: "source-map",
 
   performance: {
-      hints: "warning"
+		hints: "warning"
   },
 
   output: {
     filename: "[name].[hash:6].dev.min.js",
     path: dist
   },
-  
+    
+  devServer: {
+    contentBase: dist,
+    inline: true,
+    port: 3000
+  }
 }
