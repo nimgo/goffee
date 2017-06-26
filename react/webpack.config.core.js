@@ -82,9 +82,7 @@ var commons = {
 			{ from: "resources/fonts/*.*", to: "assets/fonts/", flatten: true },
 			{ from: "resources/imgs/*.*", to: "assets/imgs/", flatten: true },
 			{ from: "resources/js/*.*", to: "assets/js/", flatten: true },
-			{ from: "resources/favico/*", to: "assets/favico", flatten: true },
-			// { from: "node_modules/jquery/dist/jquery.min.js", to: "assets/js/", flatten: true }, // because of datepicker
-			// { from: "node_modules/bootstrap/dist/css/bootstrap.min.css.map", to: "assets/css/", flatten: true },
+			{ from: "resources/favico/*", to: "assets/favico", flatten: true }
 		])
   ]
   
