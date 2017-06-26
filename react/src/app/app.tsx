@@ -9,8 +9,9 @@ export class App extends React.Component<any, any> {
   render() {
     return (
       <div>
+        <span className="glyphicon glyphicon-search" aria-hidden="true"></span>
         <Hello compiler={title} framework="React" />
-        <span>root</span>
+       
       </div>
     );
   }
