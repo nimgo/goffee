@@ -9,7 +9,7 @@ module.exports = {
   //devtool: "source-map",
 
   performance: {
-		hints: "warning"
+		hints: false //"warning"
   },
 
   output: {
