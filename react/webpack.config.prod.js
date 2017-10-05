@@ -7,7 +7,7 @@ var dist = path.resolve(__dirname, "dist");
 module.exports = {
 
   output: {
-    filename: "scripts/[name].[hash:6].prod.min.js",
+    filename: "static/js/[name].[hash:6].prod.min.js",
     path: dist
   },
 
@@ -31,12 +31,7 @@ module.exports = {
 
 		new CleanWebpackPlugin(
 			[
-				"./assets/css",
-				"./assets/favico",
-				"./assets/fonts",
-				"./assets/imgs",
-				"./assets/js",
-				"./assets",
+				"./static",
 				"./*",
 			],
 			{

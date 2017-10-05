@@ -8,9 +8,9 @@
     "ngc": "ngc -p tsconfig.json",
     "clean": "rimraf gen dist",
     "build": "webpack --progress --profile --colors --config ./webpack.config.core.js",
-    "build:prod": "npm run clean && npm run ngc && cross-env NODE_ENV=production npm run build",
     "watch": "npm run build -- --watch",
-    "start": "webpack-dev-server --progress --colors --hot --config ./webpack.config.core.js"
+    "start": "webpack-dev-server --progress --colors --hot --config ./webpack.config.core.js",
+    "publish": "npm run clean && npm run ngc && cross-env NODE_ENV=production npm run build"
   },
   "dependencies": {
     "@angular/common": "^4.3.6",

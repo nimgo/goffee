@@ -69,11 +69,11 @@ var commons = {
 		),
 
 		new CopyWebpackPlugin([
-			{ from: "resources/css/*.*", to: "assets/css/", flatten: true },
-			{ from: "resources/fonts/*.*", to: "assets/fonts/", flatten: true },
-			{ from: "resources/imgs/*.*", to: "assets/imgs/", flatten: true },
-			{ from: "resources/js/*.*", to: "assets/js/", flatten: true },
-			{ from: "resources/favicons/*", to: "assets/favico", flatten: true },
+			{ from: "resources/css/*.*", to: "static/css/", flatten: true },
+			{ from: "resources/fonts/*.*", to: "static/fonts/", flatten: true },
+			{ from: "resources/imgs/*.*", to: "static/imgs/", flatten: true },
+			{ from: "resources/js/*.*", to: "static/js/", flatten: true },
+			{ from: "resources/favicons/*", to: "static/favico", flatten: true },
 			// { from: "node_modules/jquery/dist/jquery.min.js", to: "public/assets/js/", flatten: true }, // because of datepicker
 			// { from: "node_modules/bootstrap/dist/css/bootstrap.min.css.map", to: "public/assets/css/", flatten: true },
 		])

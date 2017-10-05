@@ -9,7 +9,8 @@ import (
 
 // Configuration contains the configurations of the webserver
 type Configuration struct {
-	Database struct {
+	Framework string `json:"framework"`
+	Database  struct {
 		Host     string `json:"host"`
 		Password string `json:"password"`
 	} `json:"database"`

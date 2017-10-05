@@ -1,4 +1,5 @@
 {
+		"framework": "vuejs",
     "database": {
         "host": "localhost",
         "password": "12345"

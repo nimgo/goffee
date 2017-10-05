@@ -12,7 +12,7 @@ module.exports = {
 	},
 
 	output: {
-		filename: "scripts/[name].[hash:6].dev.min.js",
+		filename: "static/js/[name].[hash:6].dev.min.js",
 		path: dist,
 		publicPath: "/"
 	},

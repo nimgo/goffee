@@ -6,9 +6,9 @@
   "scripts": {
     "clean": "rimraf dist",
     "build": "webpack --progress --profile --colors --config ./webpack.config.core.js",
-    "build:prod": "npm run clean && cross-env NODE_ENV=production npm run build",
     "watch": "npm run build -- --watch",
-    "start": "webpack-dev-server --progress --colors --hot --config ./webpack.config.core.js"
+    "start": "webpack-dev-server --progress --colors --hot --config ./webpack.config.core.js",
+    "publish": "npm run clean && cross-env NODE_ENV=production npm run build"
   },
   "keywords": [],
   "author": "jave",
