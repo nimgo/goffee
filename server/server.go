@@ -17,19 +17,19 @@ func serveFile(filename string) http.HandlerFunc {
 // StartServer is the entry point to start the server with configurations
 func StartServer(config Configuration) {
 
-	framework := "./" + config.Framework
+	//framework := "./" + config.Framework
 
 	mux := kernal.NewMux()
-	mux.GET("/", serveFile(framework+"/dist/index.html"))
+	//	mux.GET("/", serveFile(framework+"/dist/index.html"))
 	mux.GET("/inline", func(w http.ResponseWriter, req *http.Request) {
 		w.Write([]byte("Hello from an inline func!"))
 	})
-	mux.GET("/admin", serveFile("./webroot/admin/index.html"))
+	//mux.GET("/admin", serveFile("./webroot/admin/index.html"))
 
 	krnl := kernal.New()
 	krnl.UseHandler(middleware.NewColorLogger())
 	krnl.UseHandler(middleware.NewRecovery())
-	krnl.UseHandler(middleware.NewStatic("/static", http.Dir(framework+"/dist/static")))
+	//krnl.UseHandler(middleware.NewStatic("/static", http.Dir(framework+"/dist/static")))
 
 	krnl.Use(mux)
 
