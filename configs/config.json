@@ -1,4 +1,5 @@
 {
+    "framework": "react",
     "database": {
         "host": "localhost",
         "password": "12345"
