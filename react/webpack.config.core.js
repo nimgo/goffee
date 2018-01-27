@@ -12,37 +12,37 @@ console.log("Build: ", environment.toUpperCase());
 console.log("------------------------------------------------------");
 
 var commons = {
-  
-  performance: {
-      hints: false
-  },
-  
-  entry: {
-    "app": "./src/startup.tsx",
-    "vendor": "./src/vendor.ts",
-    "polyfills": "./src/polyfills.ts"
-  },
 
-  resolve: {
-    extensions: [
-      ".ts", ".tsx", 
-      ".js", ".jsx",
-      ".css", ".scss", 
-      ".html" 
+	performance: {
+		hints: false
+	},
+
+	entry: {
+		"app": "./src/startup.tsx",
+		"vendor": "./src/vendor.ts",
+		"polyfills": "./src/polyfills.ts"
+	},
+
+	resolve: {
+		extensions: [
+			".ts", ".tsx",
+			".js", ".jsx",
+			".css", ".scss",
+			".html"
 		]
-  },
+	},
 
-  module: {
-    rules: [
+	module: {
+		rules: [
 			{
 				test: /\.(ts|tsx)$/,
 				exclude: /node_modules/,
-				use: [ "babel-loader", "awesome-typescript-loader", "source-map-loader" ]
+				use: ["awesome-typescript-loader", "source-map-loader"]
 			},
-			{ 
+			{
 				test: /\.(js|jsx)$/,
 				exclude: /node_modules/,
-				use: [ "babel-loader", "source-map-loader" ]  
+				use: ["source-map-loader"]
 			},
 			{
 				test: /\.css$/,
@@ -52,7 +52,7 @@ var commons = {
 			{
 				test: /\.scss$/,
 				exclude: /node_modules/,
-				use: [ "style-loader", "css-loader", "sass-loader" ]
+				use: ["style-loader", "css-loader", "sass-loader"]
 			},
 			{
 				test: /\.html$/,
@@ -63,17 +63,17 @@ var commons = {
 			//   exclude: /node_modules/,
 			//   loader: "file-loader?name=assets/[name]-[hash:6].[ext]"
 			// }
-    ]
-  },
+		]
+	},
 
-  plugins: [
+	plugins: [
 
 		new HtmlWebpackPlugin(
 			{
-					chunks: ["app", "vendor", "polyfills"],
-					template: "./resources/razor/index.html",
-					inject: true,
-					filename: "./index.html",
+				chunks: ["app", "vendor", "polyfills"],
+				template: "./resources/razor/index.html",
+				inject: true,
+				filename: "./index.html",
 			}
 		),
 
@@ -84,15 +84,15 @@ var commons = {
 			{ from: "resources/js/*.*", to: "static/js/", flatten: true },
 			{ from: "resources/favico/*", to: "static/favico", flatten: true }
 		])
-  ]
-  
+	]
+
 };
 
-var configs = { };
+var configs = {};
 if (environment === "development") {
-  configs = require("./webpack.config.dev.js");
+	configs = require("./webpack.config.dev.js");
 } else {
-  configs = require("./webpack.config.prod.js");
+	configs = require("./webpack.config.prod.js");
 }
 
 var merge = require('webpack-merge');
