@@ -1,8 +1,13 @@
 package main
 
-import "github.com/nimgo/goffee/server"
+import (
+	"fmt"
+
+	"bitbucket.org/jabbl/goffee/server"
+)
 
 func main() {
 	config := server.LoadConfiguration("./configs/config.json")
-	server.StartServer(config)
+	//server.StartServer(config)
+	fmt.Println(config)
 }
